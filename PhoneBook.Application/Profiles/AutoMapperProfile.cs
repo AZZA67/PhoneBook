@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId;
 using PhoneBook.Domain;
-
 namespace PhoneBook.Application.Profiles
 {
     public class AutoMapperProfile :Profile
@@ -9,6 +8,7 @@ namespace PhoneBook.Application.Profiles
         public AutoMapperProfile()
         {
             CreateMap<phoneBook, GetPhoneBookByUserIdViewModel>().ReverseMap();
+            CreateMap<CreateUserViewModel, ApplicationUser>().ReverseMap();
         }
        
     }
