@@ -13,14 +13,14 @@ namespace PhoneBook.Presistence
 {
     public static class PresistenceContainer
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<Dbcontext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("PhoneBook")));
+        //public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+        //{
+        //    //services.AddDbContext<Dbcontext>(options =>
+        //    //    options.UseSqlServer(configuration.GetConnectionString("Cs")));
 
-            services.AddScoped<IPhoneBookRepository,PhoneBookRepository>();
+        //    //services.AddScoped<IPhoneBookRepository,PhoneBookRepository>();
          
-            return services;
-        }
+        //    //return services;
+        //}
     }
 }

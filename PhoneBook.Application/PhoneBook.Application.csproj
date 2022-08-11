@@ -10,8 +10,8 @@
     <Folder Include="Features\PhoneBook\Commands\CreatePhoneBook\" />
     <Folder Include="Features\PhoneBook\Commands\DeletePhoneBook\" />
     <Folder Include="Features\PhoneBook\Commands\UpdatePhoneBook\" />
-    <Folder Include="Features\User\UserCreate\" />
-    <Folder Include="Features\User\UserLogin\" />
+    <Folder Include="Features\User\Queries\" />
+    <Folder Include="Messages\" />
   </ItemGroup>
 
   <ItemGroup>

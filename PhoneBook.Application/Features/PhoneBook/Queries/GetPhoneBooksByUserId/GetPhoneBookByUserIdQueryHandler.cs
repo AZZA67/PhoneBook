@@ -6,7 +6,6 @@ namespace PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId
 {
     internal class GetPhoneBookByUserIdQueryHandler : IRequestHandler<GetPhoneBooksByUserIdQuery, List<GetPhoneBookByUserIdViewModel>>
     {
-
         private readonly IPhoneBookRepository _phonebookRepository;
         private readonly IMapper _mapper;
         public GetPhoneBookByUserIdQueryHandler(IPhoneBookRepository PhoneBookRepository, IMapper mapper)
