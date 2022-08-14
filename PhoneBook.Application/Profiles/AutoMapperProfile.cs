@@ -8,7 +8,7 @@ namespace PhoneBook.Application.Profiles
         public AutoMapperProfile()
         {
             CreateMap<phoneBook, GetPhoneBookByUserIdViewModel>().ReverseMap();
-            CreateMap<CreateUserViewModel, ApplicationUser>().ReverseMap();
+            //CreateMap<CreateUserViewModel, ApplicationUser>().ReverseMap();
         }
        
     }
