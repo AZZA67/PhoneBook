@@ -29,4 +29,6 @@ app.UseAuthorization();
 
 //app.MapControllers();
 
+app.MapPost("/Phonebook/CreatePhoneBook", () => "Inspect Endpoint.");
+app.MapGet("/Phonebook/GetPhonebooksByUserId", () => "Inspect Endpoint.");
 app.Run();

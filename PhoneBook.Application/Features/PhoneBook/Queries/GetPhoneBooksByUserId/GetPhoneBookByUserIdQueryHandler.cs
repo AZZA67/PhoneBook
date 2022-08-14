@@ -15,8 +15,6 @@ namespace PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId
         }
         public async Task<List<GetPhoneBookByUserIdViewModel>> Handle(GetPhoneBooksByUserIdQuery request, CancellationToken cancellationToken)
         {
-            //throw new NotImplementedException();
-
             var allPhonebooks =   await _phonebookRepository.GetPhoneBookByUserId(request.UserId);
             return _mapper.Map<List<GetPhoneBookByUserIdViewModel>>(allPhonebooks);
         }

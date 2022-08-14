@@ -22,8 +22,10 @@ namespace PhoneBook.Api.EndPoints.UseeManagementEndPoints
             _mediateR = MediateR;
             _mapper = Mapper;   
         }
+
         [HttpPost("/CreateUser/AddNewUser")]
-        public override Task<ActionResult<ApplicationUser>> HandleAsync(CreateUserViewModel request, CancellationToken cancellationToken = default)
+        public override Task<ActionResult<ApplicationUser>> HandleAsync(CreateUserViewModel request,
+            CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Creating User Account");
             //var input = _mapper.Map<request, ApplicationUser>();

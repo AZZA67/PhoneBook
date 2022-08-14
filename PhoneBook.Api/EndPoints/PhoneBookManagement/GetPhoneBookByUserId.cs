@@ -5,9 +5,7 @@ using PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId;
 
 namespace PhoneBook.Api.EndPoints.PhoneBookManagement
 {
-    public class GetPhoneBookByUserId: EndpointBaseAsync.
-        WithRequest<GetPhoneBooksByUserIdQuery>
-        .WithActionResult<List<GetPhoneBookByUserIdViewModel>>
+    public class GetPhoneBookByUserId
     {
         private readonly IMediator _mediator;
 
@@ -17,17 +15,21 @@ namespace PhoneBook.Api.EndPoints.PhoneBookManagement
         }
 
         //[HttpGet("/Phonebook/GetPhonebbok")]
-        internal async Task<ActionResult<List<GetPhoneBookByUserIdViewModel>>> GetAllPhoneBooks()
-        {
-            var dtos = await _mediator.Send(new GetPhoneBooksByUserIdQuery());
-            return Ok(dtos);
-        }
-        [HttpGet("/Phonebook/GetPhonebbok")]
-        public override Task<ActionResult<List<GetPhoneBookByUserIdViewModel>>> HandleAsync(GetPhoneBooksByUserIdQuery request, CancellationToken cancellationToken = default)
-        {
+       
+        //[HttpGet("/Phonebook/GetPhonebooksByUserId")]
+        //public async  Task<List<GetPhoneBookByUserIdViewModel>>
+        //    HandleAsync(GetPhoneBooksByUserIdQuery request, CancellationToken cancellationToken = default)
+        //{
+        //    return  await _mediator.Send(request);
+          
+        //}
 
-             
-            throw new NotImplementedException();
+        [HttpGet("{id}", Name = "/Phonebook/GetPhonebooksByUserId")]
+        public async Task<List<GetPhoneBookByUserIdViewModel>> GetPhoneBookByUserid(Guid id)
+        {
+            var GetPhoneBooksByUserIdQuery = new GetPhoneBooksByUserIdQuery() { UserId = id };
+            return await _mediator.Send(GetPhoneBooksByUserIdQuery);
         }
+
     }
 }

@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\PhoneBook\Commands\CreatePhoneBook\" />
-    <Folder Include="Features\PhoneBook\Commands\DeletePhoneBook\" />
-    <Folder Include="Features\PhoneBook\Commands\UpdatePhoneBook\" />
+    <Compile Remove="Messages\**" />
+    <EmbeddedResource Remove="Messages\**" />
+    <None Remove="Messages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Features\User\Queries\" />
-    <Folder Include="Messages\" />
   </ItemGroup>
 
   <ItemGroup>

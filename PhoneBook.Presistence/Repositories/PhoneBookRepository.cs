@@ -24,14 +24,17 @@ namespace PhoneBook.Presistence.Repositories
             return allphonebooks;
         }
 
-        public async Task<int> Add(phoneBook phonebook)
+        public async Task<phoneBook> Add(phoneBook phonebook)
         {
             if (dbcontext.phonebooks != null)
 
                dbcontext.phonebooks.Add(phonebook);
-             return await dbcontext.SaveChangesAsync();
+           
+                await dbcontext.SaveChangesAsync();
+            return phonebook;
 
-          
+
+
         }
         public async Task<int> Update(phoneBook phonebook)
         {
