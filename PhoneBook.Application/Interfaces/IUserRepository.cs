@@ -1,4 +1,5 @@
 ﻿using PhoneBook.Application.Features.User.Commands.CreateUser;
+using PhoneBook.Application.Features.User.Commands.UserLogin;
 using PhoneBook.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace PhoneBook.Application.Interfaces
     public interface IUserRepository
     {
         Task<ApplicationUser> Register(CreateAccountCommand _user);
+        Task<string> Login(UserLoginCommand _user);
+
     }
 }

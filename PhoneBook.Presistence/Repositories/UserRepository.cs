@@ -14,6 +14,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using PhoneBook.Application.Interfaces;
+using PhoneBook.Application.Features.User.Commands.UserLogin;
+
 namespace PhoneBook.Presistence.Repositories
 {
     public class UserRepository : IUserRepository
@@ -53,57 +55,30 @@ namespace PhoneBook.Presistence.Repositories
             return user;
         }
 
-        //public async Task<IActionResult> Login([FromBody] LoginModel model)
-        //{
-        //    var user = await userManager.FindByNameAsync(model.Username);
-        //    if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
-        //    {
-        //        var userRoles = await userManager.GetRolesAsync(user);
-        //        //HttpContext.User =  SignInManager(user);
-        //        //this.Claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-        //        //this.Claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-        //        //this.Claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+       
+        public async Task<string> Login(UserLoginCommand model)
+        {
+            
+               
+         
+            var user = await userManager.FindByNameAsync(model.UserName);
+            if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+            {
+                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecrtKey"]));
+                var token = new JwtSecurityToken(
+                         issuer: _configuration["JWT:ValidIssuer"],
+                         audience: _configuration["JWT:ValidAudience"],
+                         expires: DateTime.Now.AddHours(3),
 
-        //        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.NameIdentifier, user.Id));
-        //        await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user.UserName));
-        //        await userManager.AddClaimAsync(user, new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-        //        var authClaims = new List<Claim>
-        //            {
-        //                new Claim(ClaimTypes.Name, user.UserName),
-        //                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        //                new Claim(ClaimTypes.NameIdentifier, user.Id)
-        //        };
+                         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                         );
 
-        //        foreach (var userRole in userRoles)
-        //        {
-        //            authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-        //        }
+                var Tokenn = new JwtSecurityTokenHandler().WriteToken(token);
+                return Tokenn;
+            }
+            return "UnAuthorized";
 
-
-
-
-        //        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecrtKey"]));
-
-        //        var token = new JwtSecurityToken(
-        //            issuer: _configuration["JWT:ValidIssuer"],
-        //            audience: _configuration["JWT:ValidAudience"],
-        //            expires: DateTime.Now.AddHours(3),
-        //            claims: authClaims,
-        //            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-        //            );
-        //        //getuser( authClaims);
-
-        //        return Ok(new
-        //        {
-        //            token = new JwtSecurityTokenHandler().WriteToken(token),
-        //            expiration = token.ValidTo,
-        //            authClaims = authClaims[2].Value
-
-        //        });
-        //    }
-        //    return Unauthorized();
-        //}
-
+        }
 
 
 

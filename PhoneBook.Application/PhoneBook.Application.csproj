@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\User\Queries\**" />
     <Compile Remove="Messages\**" />
+    <EmbeddedResource Remove="Features\User\Queries\**" />
     <EmbeddedResource Remove="Messages\**" />
+    <None Remove="Features\User\Queries\**" />
     <None Remove="Messages\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\User\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
