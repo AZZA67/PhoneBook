@@ -2,35 +2,30 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PhoneBook.Api.DTO;
+using PhoneBook.Application.Features.PhoneBook.Commands.CreatePhoneBook;
+using PhoneBook.Application.Features.User.Commands.CreateUser;
 using PhoneBook.Domain;
 
 namespace PhoneBook.Api.EndPoints.UseeManagementEndPoints
 {
-    public class CreateUser : EndpointBaseAsync.
-        WithRequest<CreateUserViewModel>
-        .WithActionResult<ApplicationUser>
+    public class CreateUser 
     {
 
       private readonly  IMapper _mapper;
         private readonly IMediator _mediateR;
-        private readonly ILogger _logger;   
+        private readonly ILogger _logger;
 
         public CreateUser(ILogger logger, IMediator MediateR, IMapper Mapper)
         {
             _logger = logger;
             _mediateR = MediateR;
-            _mapper = Mapper;   
+            _mapper = Mapper;
         }
-
-        [HttpPost("/CreateUser/AddNewUser")]
-        public override Task<ActionResult<ApplicationUser>> HandleAsync(CreateUserViewModel request,
+        [HttpPost("/AddNewUser")]
+        public async Task<ApplicationUser> AddNewUser(CreateAccountCommand request,
             CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation("Creating User Account");
-            //var input = _mapper.Map<request, ApplicationUser>();
-            throw new NotImplementedException();
+            return await _mediateR.Send(request);
         }
-        
     }
 }

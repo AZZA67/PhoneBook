@@ -14,15 +14,6 @@ namespace PhoneBook.Api.EndPoints.PhoneBookManagement
             _mediator = mediator;
         }
 
-        //[HttpGet("/Phonebook/GetPhonebbok")]
-       
-        //[HttpGet("/Phonebook/GetPhonebooksByUserId")]
-        //public async  Task<List<GetPhoneBookByUserIdViewModel>>
-        //    HandleAsync(GetPhoneBooksByUserIdQuery request, CancellationToken cancellationToken = default)
-        //{
-        //    return  await _mediator.Send(request);
-          
-        //}
 
         [HttpGet("{id}", Name = "/Phonebook/GetPhonebooksByUserId")]
         public async Task<List<GetPhoneBookByUserIdViewModel>> GetPhoneBookByUserid(Guid id)

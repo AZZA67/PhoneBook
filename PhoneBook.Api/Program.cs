@@ -1,24 +1,17 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.Extensions.Configuration;
-using PhoneBook.Application;
-using PhoneBook.Application.Interfaces;
-using PhoneBook.Presistence;
-using PhoneBook.Presistence.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using PhoneBook.Application.Features.PhoneBook.Commands.CreatePhoneBook;
+using PhoneBook.Application.Features.PhoneBook.Commands.RemovePhoneBook;
+using PhoneBook.Application.Features.PhoneBook.Commands.UpdatePhoneBook;
+using PhoneBook.Application.Features.User.Commands.CreateUser;
 
 var builder = WebApplication.CreateBuilder(args);
-ConfigurationManager Configuration = builder.Configuration; //also you can use builderkeyword
+ConfigurationManager Configuration = builder.Configuration; 
 IWebHostEnvironment environment = builder.Environment;
-// Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
-
-//builder.Services.AddControllers();
-
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -26,9 +19,9 @@ if (app.Environment.IsDevelopment())
 }
 app.UseAuthentication();
 app.UseAuthorization();
-
-//app.MapControllers();
-
-app.MapPost("/Phonebook/CreatePhoneBook", () => "Inspect Endpoint.");
-app.MapGet("/Phonebook/GetPhonebooksByUserId", () => "Inspect Endpoint.");
+app.MapPost("/Phonebook/CreatePhoneBook", ([FromBody] CreatePhoneBookCommand cmd) => { } );
+app.MapPost("/AddNewUser", ([FromBody] CreateAccountCommand cmd) => { });
+app.MapPut("/Phonebook/UpdatePhonebook", ([FromBody] UpdatePhoneBookCommand umd) => { }  );
+app.MapDelete("/Phonebook/UpdatePhoneBook", ([FromBody] RemovePhoneBookCommand umd) => { });
+app.MapGet("/Phonebook/GetPhonebooksByUserId/{id}", (Guid id) => { });
 app.Run();

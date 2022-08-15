@@ -1,11 +1,21 @@
 ﻿using PhoneBook.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace PhoneBook.Application.Interfaces
 {
     public interface IPhoneBookRepository
     {
-        Task<IReadOnlyList<phoneBook>>  GetPhoneBookByUserId(Guid id);
-        Task<phoneBook> Add(phoneBook phonebook);
-        Task<int> Update(phoneBook phonebook);
-        Task<int> delete(phoneBook phonebook);
+
+       
+            Task<phoneBook> Add(phoneBook phonebook);
+            Task<int> delete(Guid phonebookId);
+            Task<IReadOnlyList<phoneBook>> GetPhoneBookByUserId(Guid id);
+            Task<int> Update(Guid phonebookId);
+        
     }
 }
+

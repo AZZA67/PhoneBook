@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Application.Features.User.Commands.CreateUser
 {
-    public class CreateAccountQuery : IRequest<ApplicationUser>
+    public class CreateAccountCommand : IRequest<ApplicationUser>
     {
-
+        public string? UserName { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirmPassword { get; set; }
     }
 }
