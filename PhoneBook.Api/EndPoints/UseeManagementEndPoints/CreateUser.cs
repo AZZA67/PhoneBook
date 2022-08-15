@@ -8,24 +8,30 @@ using PhoneBook.Domain;
 
 namespace PhoneBook.Api.EndPoints.UseeManagementEndPoints
 {
-    public class CreateUser 
+    public class CreateUser:EndpointBaseAsync.WithRequest<CreateAccountCommand>.
+        WithActionResult<ApplicationUser>
     {
 
       private readonly  IMapper _mapper;
-        private readonly IMediator _mediateR;
-        private readonly ILogger _logger;
+       private readonly IMediator _mediateR;
+       
 
-        public CreateUser(ILogger logger, IMediator MediateR, IMapper Mapper)
+        public CreateUser( IMediator MediateR, IMapper Mapper)
         {
-            _logger = logger;
+            
             _mediateR = MediateR;
             _mapper = Mapper;
         }
+        //[HttpPost("/AddNewUser")]
+        //public async Task<ApplicationUser> AddNewUser([FromBody] CreateAccountCommand request,
+        //    CancellationToken cancellationToken = default)
+        //{
+        //    return await _mediateR.Send(request);
+        //}
         [HttpPost("/AddNewUser")]
-        public async Task<ApplicationUser> AddNewUser(CreateAccountCommand request,
-            CancellationToken cancellationToken = default)
+        public override async Task<ActionResult<ApplicationUser>> HandleAsync([FromBody] CreateAccountCommand request, CancellationToken cancellationToken = default)
         {
-            return await _mediateR.Send(request);
+            return Ok(await _mediateR.Send(request));
         }
     }
 }

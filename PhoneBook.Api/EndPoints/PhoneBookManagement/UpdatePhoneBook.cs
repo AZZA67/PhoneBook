@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ardalis.ApiEndpoints;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Application.Features.PhoneBook.Commands.UpdatePhoneBook;
 using PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId;
@@ -7,7 +8,8 @@ using System.Xml.Linq;
 
 namespace PhoneBook.Api.EndPoints.PhoneBookManagement
 {
-    public class UpdatePhoneBook
+    public class UpdatePhoneBook:EndpointBaseAsync.WithRequest<UpdatePhoneBookCommand>.
+        WithActionResult<phoneBook>
     {
         private readonly IMediator _mediator;
 
@@ -15,12 +17,13 @@ namespace PhoneBook.Api.EndPoints.PhoneBookManagement
         {
             _mediator = mediator;
         }
-        [HttpPut("{id}", Name = "/Phonebook/UpdatePhonebook")]
-        public async Task<phoneBook> UpdatePhonebook([FromBody] Guid id)
+        [HttpPut("/UpdatePhoneBook")]
+        public  async override Task<ActionResult<phoneBook>> HandleAsync([FromBody]UpdatePhoneBookCommand request, 
+            CancellationToken cancellationToken = default)
         {
-            var _PhoneBook = new UpdatePhoneBookCommand() { PhoneBookId = id };
-            return await _mediator.Send(_PhoneBook);
+            return Ok(await _mediator.Send(request));
         }
+      
 
     }
 }

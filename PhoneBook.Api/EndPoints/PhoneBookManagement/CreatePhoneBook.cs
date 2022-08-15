@@ -1,27 +1,34 @@
-﻿using MediatR;
+﻿using Ardalis.ApiEndpoints;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Application.Features.PhoneBook.Commands.CreatePhoneBook;
 using PhoneBook.Application.Features.PhoneBook.Queries.GetPhoneBooksByUserId;
+using PhoneBook.Application.Features.User.Commands.CreateUser;
 using PhoneBook.Domain;
+
 
 namespace PhoneBook.Api.EndPoints.PhoneBookManagement
 {
-    public class CreatePhoneBook
+    public class CreatePhoneBook: EndpointBaseAsync.WithRequest<CreatePhoneBookCommand>.
+        WithActionResult<phoneBook>
     {
+           private readonly IMediator _mediator;
 
-        private readonly IMediator _mediator;
+    public CreatePhoneBook(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
 
-        public CreatePhoneBook(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
-        [HttpPost("/Phonebook/CreatePhoneBook")]
-        public async Task<phoneBook> HandleAsync(CreatePhoneBookCommand request, CancellationToken cancellationToken = default)
-        {
-            return await _mediator.Send(request);
-
-        }
-
+    [HttpPost("/AddNewPhoneBook")]
+    public override async Task<ActionResult<phoneBook>> HandleAsync([FromBody] CreatePhoneBookCommand request, CancellationToken cancellationToken = default)
+    {
+        return Ok(await _mediator.Send(request));
     }
 }
+}
+        
+
+     
+
+
+

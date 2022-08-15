@@ -25,7 +25,11 @@ namespace PhoneBook.Presistence.Repositories
         private readonly SignInManager<ApplicationUser> signinmanager;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UserRepository(IHttpContextAccessor httpContextAccessor, SignInManager<ApplicationUser> signinmanager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, Dbcontext context)
+        public UserRepository(IHttpContextAccessor httpContextAccessor,
+            SignInManager<ApplicationUser> signinmanager,
+            UserManager<ApplicationUser> userManager, 
+            RoleManager<IdentityRole> roleManager, 
+            IConfiguration configuration, Dbcontext context)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.userManager = userManager;
@@ -41,7 +45,6 @@ namespace PhoneBook.Presistence.Repositories
             ApplicationUser user = new ApplicationUser()
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
-
                 UserName = _user.UserName,
                 PasswordHash = _user.Password
             };

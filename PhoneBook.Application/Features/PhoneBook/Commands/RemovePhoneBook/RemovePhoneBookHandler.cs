@@ -23,9 +23,10 @@ namespace PhoneBook.Application.Features.PhoneBook.Commands.RemovePhoneBook
         }
 
 
-       public async Task<int> Handle(RemovePhoneBookCommand request, CancellationToken cancellationToken)
+       public async Task<int> Handle(RemovePhoneBookCommand request,
+           CancellationToken cancellationToken)
         {
-                var RowAffected = await _phonebookRepository.delete(request.PhoneBookId);
+                int RowAffected = await _phonebookRepository.delete(request.PhoneBookId);
             return RowAffected;
         }
     }

@@ -23,8 +23,9 @@ namespace PhoneBook.Application.Features.PhoneBook.Commands.UpdatePhoneBook
 
        public async Task<phoneBook> Handle(UpdatePhoneBookCommand request, CancellationToken cancellationToken)
         {
-                var phonebook = await _phonebookRepository.Update(request.PhoneBookId);
-               return _mapper.Map<phoneBook>(phonebook);
+            var phonebook=_mapper.Map<phoneBook>(request);
+          return  await _phonebookRepository.Update(phonebook);
+            
         }
     }
 }

@@ -14,7 +14,7 @@ namespace PhoneBook.Application.Interfaces
             Task<phoneBook> Add(phoneBook phonebook);
             Task<int> delete(Guid phonebookId);
             Task<IReadOnlyList<phoneBook>> GetPhoneBookByUserId(Guid id);
-            Task<int> Update(Guid phonebookId);
+            Task<phoneBook> Update(phoneBook phoneBook);
         
     }
 }

@@ -31,13 +31,20 @@ namespace PhoneBook.Presistence.Repositories
 
 
         }
-        public async Task<int> Update(Guid phonebookId)
+        public async Task<phoneBook> Update(phoneBook update_phonebook)
         {
-            phoneBook? _phonebook = dbcontext.phonebooks.FirstOrDefault(ph => ph.Id == phonebookId);
-            if (_phonebook != null)
-                dbcontext.phonebooks.Update(_phonebook);
-            return await dbcontext.SaveChangesAsync();
 
+            phoneBook? _phonebook = dbcontext.phonebooks.FirstOrDefault(ph => ph.Id == update_phonebook.Id);
+            if (_phonebook != null)
+            {
+                _phonebook.PhoneNumber = update_phonebook.PhoneNumber;
+                _phonebook.Name = update_phonebook.Name;
+
+                dbcontext.phonebooks.Update(_phonebook);
+            }
+          
+                await dbcontext.SaveChangesAsync();
+            return _phonebook;
 
         }
 
@@ -51,13 +58,5 @@ namespace PhoneBook.Presistence.Repositories
 
 
         }
-
-
-      
-
-
-
-
-
     }
 }

@@ -10,6 +10,8 @@ namespace PhoneBook.Application.Features.PhoneBook.Commands.UpdatePhoneBook
 {
     public class UpdatePhoneBookCommand : IRequest<phoneBook>
     {
-        public Guid PhoneBookId { get; set; }
+        public Guid Id { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Name { get; set; }
     }
 }

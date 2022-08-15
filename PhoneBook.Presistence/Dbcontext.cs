@@ -22,7 +22,7 @@ namespace PhoneBook.Presistence
         protected override void OnConfiguring(DbContextOptionsBuilder options)
     => options.UseSqlServer("Data Source=DESKTOP-CKHD3I1\\SQLEXPRESS; Initial Catalog = PhoneBook; Integrated Security = True; TrustServerCertificate=True");
 
-        public DbSet<phoneBook> phonebooks { get; set; }
+        public DbSet<phoneBook> phonebooks { get;set; }
 
 
     }
